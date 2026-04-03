@@ -52,6 +52,7 @@ export default defineConfig(async ({ mode }) => {
 		resolve: {
 			alias: {
 				'@': path.resolve(__dirname, 'src'),
+				'../../../../sites/common_site_config.json': path.resolve(__dirname, 'src/mock_config.json'),
 			},
 		},
 		optimizeDeps: {

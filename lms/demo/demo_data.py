@@ -325,6 +325,10 @@ def create_quiz_questions(question, option_1, is_correct_1, option_2, is_correct
 
 
 def create_reviews(course, student):
+	if frappe.db.exists("LMS Course Review", {"course": course.name, "owner": student.name}):
+		# Existing review already present; skip for idempotent demo setup
+		return
+
 	frappe.session.user = student.name
 	review = frappe.new_doc("LMS Course Review")
 	review.course = course.name
@@ -342,6 +346,11 @@ def enroll_student_in_course(student, course):
 		enrollment.member = student.name
 		enrollment.course = course.name
 		enrollment.save()
+
+
+def clear_course_reviews():
+	frappe.db.delete("LMS Course Review")
+	frappe.db.commit()
 
 
 def create_progress(course, student, limit=None):

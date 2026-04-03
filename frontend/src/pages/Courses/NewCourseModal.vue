@@ -60,6 +60,11 @@
 							editorClass="prose-sm max-w-none border-b border-x border-outline-gray-modals bg-surface-gray-2 rounded-b-md py-1 px-2 min-h-[10rem] max-h-[17rem] overflow-auto"
 						/>
 					</div>
+					<FormControl
+						v-model="course.published"
+						:label="__('Publish Course')"
+						type="checkbox"
+					/>
 				</div>
 			</div>
 		</template>
@@ -107,6 +112,7 @@ type Course = {
 	instructors: string[]
 	category: string | null
 	image: string | null
+	published: boolean
 }
 
 const course = ref<Course>({
@@ -116,6 +122,7 @@ const course = ref<Course>({
 	instructors: [],
 	category: null,
 	image: null,
+	published: true,
 })
 
 const createCategory = (name: string, done: () => void) => {
